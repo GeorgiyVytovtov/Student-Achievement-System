@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>save_all.png</file>
+        <file>cut.png</file>
+        <file>copy.png</file>
+        <file>paste.png</file>
+        <file>delete.png</file>
+        <file>exit.png</file>
+        <file>save_as.png</file>
+        <file>exsport_to_csv.png</file>
+        <file>about.png</file>
+        <file>main_icon.png</file>
+        <file>delete_all.png</file>
+    </qresource>
+</RCC>
