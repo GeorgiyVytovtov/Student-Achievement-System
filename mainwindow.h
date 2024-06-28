@@ -31,11 +31,11 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
-    QGridLayout* main_=new QGridLayout;
+    QGridLayout* main_;
 
     static QString save_path_;
     QStringList button_list_;
-    QSettings settings_;
+    QSettings *settings_;
     QMap<QString,QMainWindow* > running_proces_;
 
     int size_button_x_;

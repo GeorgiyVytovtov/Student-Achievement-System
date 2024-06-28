@@ -12,6 +12,9 @@ QString MainWindow::save_path_ = QDir::homePath();
 
 MainWindow::MainWindow(QWidget* parent): QMainWindow(parent), ui(new Ui::MainWindow),size_button_x_(0),size_button_y_(0)
 {
+    main_=new QGridLayout;
+    settings_=new QSettings(QDir::homePath()+"/Settings.ini", QSettings::Format::IniFormat);
+
     ui->setupUi(this);
     ui->creatButtons->setFixedSize(90,90);
 
@@ -23,10 +26,10 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent), ui(new Ui::MainWin
     connect(ui->actionExit,SIGNAL(triggered(bool)),SLOT(close()));
     ui->actionChange_path_to_save->setStatusTip("Changing the save class path and moving all classes to the new path");
 
-    button_list_ = settings_.value("/Settings/classes").toStringList();
+    button_list_ = settings_->value("/Settings/classes").toStringList();
     createButton();
 
-    QString pathSettings = settings_.value("/Settings/path","").toString();
+    QString pathSettings = settings_->value("/Settings/path","").toString();
     if(!pathSettings.isEmpty())
             save_path_ = pathSettings;
     else
@@ -50,10 +53,10 @@ void MainWindow::closeEvent(QCloseEvent* event)
         counterProcess--;
     }
 
-    settings_.beginGroup("/Settings");
-    settings_.setValue("/path",save_path_);
-    settings_.setValue("/classes",button_list_);
-    settings_.endGroup();
+    settings_->beginGroup("/Settings");
+    settings_->setValue("/path",save_path_);
+    settings_->setValue("/classes",button_list_);
+    settings_->endGroup();
     event->accept();
 }
 
@@ -102,9 +105,9 @@ void MainWindow::changePathSave()
         oldDir.rmdir(save_path_);
         save_path_=newPath + "/SaveDir";
 
-        settings_.beginGroup("/Settings");
-        settings_.setValue("/path",save_path_);
-        settings_.endGroup();
+        settings_->beginGroup("/Settings");
+        settings_->setValue("/path",save_path_);
+        settings_->endGroup();
     }
     else{
         QMessageBox::warning(this,"Warning","The folder is already exist in this folder or you are trying to create a subfolder within the folder SaveDir. Chack save path again!");

@@ -42,6 +42,8 @@ FORMS += \
     mainwindow.ui \
     table.ui
 
+win32:RC_FILE=Icon.rc
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
